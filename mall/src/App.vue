@@ -1,22 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+// import axios from 'axios'
+// import jsonp from 'jsonp'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+
   },
   data(){
       return{
-        age:"30",
+        // age:"30",
+        // data:'',
       }
+  },
+  mounted(){
+   // var url="https://www.easy-mock.com/mock/5b012c1fe6e1035843cd3aff/mockapi/table/list"
+   // var url= "/api/activity/servicetime"
+    // axios.get(url).then(()=>{
+
+    // })
+    // jsonp(url,(err,res)=>{
+    //   let result=res;
+    //   this.data=result;
+    // })
   }
 }
 </script>
