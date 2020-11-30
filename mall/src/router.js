@@ -9,6 +9,7 @@ import Cart from './pages/cart'
 import Order from './pages/order'
 import OrderList from './pages/orderList'
 import OrderPay from './pages/orderPay'
+import AliPay from './pages/aliPay'
 import OrderConfirm from './pages/orderConfirm'
 
 
@@ -47,18 +48,22 @@ import OrderConfirm from './pages/orderConfirm'
             component:Order,
             children:[
                 {
-                    path:'/list',
+                    path:'list',
                     name:'order-list',
                     component:OrderList,
                 },{
-                    path:'/confirm',
+                    path:'confirm',
                     name:'order-confirm',
                     component:OrderConfirm,
                 },
                 ,{
-                    path:'/orderPay',
+                    path:'pay',
                     name:'order-pay',
                     component:OrderPay,
+                },{
+                    path:'alipay',
+                    name:'ali-pay',
+                    component:AliPay,
                 },
             ]
          },
