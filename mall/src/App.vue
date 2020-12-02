@@ -8,7 +8,7 @@
 
 // import axios from 'axios'
 // import jsonp from 'jsonp'
-
+import storage from './storage'
 export default {
   name: 'App',
   components: {
@@ -21,6 +21,10 @@ export default {
       }
   },
   mounted(){
+  //  storage.setItem('a',1);
+   //storage.setItem('user',{a:1});
+   // storage.setItem('abc',{a:1},'user');
+   storage.clear('a',"user")
    // var url="https://www.easy-mock.com/mock/5b012c1fe6e1035843cd3aff/mockapi/table/list"
    // var url= "/api/activity/servicetime"
     // axios.get(url).then(()=>{

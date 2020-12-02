@@ -5,7 +5,7 @@ module.exports = {
     port:8080,
     proxy:{
       '/api':{
-        target:"https://www.imooc.com",
+        target:"https://dev-www.imooc.com",
         changeOrigin:true,
         pathRewrite:{
           '/api': ''
