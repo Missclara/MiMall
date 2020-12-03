@@ -4,9 +4,16 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'//每个页面都有导入axios，把axios挂载到每个页面上，用vue-axios可以用this直接访问
 import App from './App.vue'
 //import env from './env'
+//moc开关
+const mock=false;
+if(mock){
+ //
+  require('./mock/api');//用improt是预编译加载的，require是从上到下加载编译的
+}
 
-//根据前端的跨域方式做调整 /a/b: /api/a/b=>/a/b
-//axios.defaults.baseURL='http://test-www.imooc.com/api';
+//根据前端的跨域方式做调整 /a/b: /api/a/b=>/a/b https://www.easy-mock.com/mock/5fbf59dc1bc0682deacc018d/example
+axios.defaults.baseURL='/api';
+// axios.defaults.baseURL='https://www.easy-mock.com/mock/5fbf59dc1bc0682deacc018d/example';
 axios.defaults.timeout=8000;
 //根据环境变量获取不同的请求地址
 //axios.defaults.baseURL=env.baseURL;
@@ -25,8 +32,6 @@ axios.interceptors.response.use(function(response){
 
 Vue.use(VueAxios,axios)
 Vue.config.productionTip = false//生产环境的提示
-
-
 new Vue({
   router,
   render: h => h(App),

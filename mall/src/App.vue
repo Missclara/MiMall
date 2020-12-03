@@ -6,8 +6,7 @@
 
 <script>
 
-// import axios from 'axios'
-// import jsonp from 'jsonp'
+
 import storage from './storage'
 export default {
   name: 'App',
@@ -17,8 +16,7 @@ export default {
   data(){
       return{
         res:{}
-        // age:"30",
-        // data:'',
+   
       }
   },
   mounted(){
@@ -26,23 +24,15 @@ export default {
     // this.axios.get('/mock/user/login.json').then((res)=>{
     //   this.res=res;
     // })
-
-    this.axios.get('/mock/user/login.json').then((res)=>{
+   //通过easy-mock平台实现数据mock
+    // this.axios.get('/user/login').then((res)=>{
+    //   this.res=res;
+    // })
+  
+   //本地集成mockjs,实现数据mock
+    this.axios.get('/user/login').then((res)=>{
       this.res=res;
     })
-  //  storage.setItem('a',1);
-   //storage.setItem('user',{a:1});
-   // storage.setItem('abc',{a:1},'user');
-   storage.clear('a',"user")
-   // var url="https://www.easy-mock.com/mock/5b012c1fe6e1035843cd3aff/mockapi/table/list"
-   // var url= "/api/activity/servicetime"
-    // axios.get(url).then(()=>{
-
-    // })
-    // jsonp(url,(err,res)=>{
-    //   let result=res;
-    //   this.data=result;
-    // })
   }
 }
 </script>
