@@ -4,6 +4,9 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'//每个页面都有导入axios，把axios挂载到每个页面上，用vue-axios可以用this直接访问
 import App from './App.vue'
 //import env from './env'
+import './assets/scss/base.scss';
+import './assets/scss/mixin.scss';
+import './assets/scss/config.scss';
 //moc开关
 const mock=false;
 if(mock){
