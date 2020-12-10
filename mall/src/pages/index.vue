@@ -215,7 +215,7 @@ export default {
           this.axios.get('/products',{
               params:{
                  categoryId:100012,
-                 pageSize:14 
+                 pageSize:14,
               }
           }).then((res)=>{
               res.list=res.list.slice(6,14)
