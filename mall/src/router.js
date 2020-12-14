@@ -6,6 +6,7 @@ import Index from './pages/index'
 import Product from './pages/product'
 import Detail from './pages/detail'
 import Cart from './pages/cart'
+import Login from './pages/login'
 import Order from './pages/order'
 import OrderList from './pages/orderList'
 import OrderPay from './pages/orderPay'
@@ -42,6 +43,10 @@ import OrderConfirm from './pages/orderConfirm'
             path:'/cart',
             name:'cart',
             component:Cart,
+         },{
+            path:'/login',
+            name:'login',
+            component:Login,
          }, {
             path:'/order',
             name:'order',

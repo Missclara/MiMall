@@ -3,7 +3,10 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'//每个页面都有导入axios，把axios挂载到每个页面上，用vue-axios可以用this直接访问
 import VueLazyload from 'vue-lazyload'//实现图片懒加载
+import VueCookie from "vue-cookie"
+import store from './store';
 import App from './App.vue'
+
 //import env from './env'
 import './assets/scss/base.scss';
 import './assets/scss/mixin.scss';
@@ -24,22 +27,30 @@ axios.defaults.timeout=8000;
 //接口错误拦截
 axios.interceptors.response.use(function(response){
    let res= response.data;
+   let path=location.hash;
    if(res.status==0){
      return res.data;
    }else if(res.status==10){//没有登陆的时候，一般定义为1008 核心系统一般1001开始  业务系统一般是2001开始  
-     window.location.href='/#/login';
+    if(path !='#/index'){
+      window.location.href='/#/login';
+    }
+    
    }else{
+
      alert(res.msg);
+     return Promise.reject(res);
    }
 })
 
 
 Vue.use(VueAxios,axios)
+Vue.use(VueCookie)
 Vue.use(VueLazyload,{
   loading:'/imgs/loading-svg/loading-bars.svg'
 })
 Vue.config.productionTip = false//生产环境的提示
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

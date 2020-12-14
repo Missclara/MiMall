@@ -242,8 +242,8 @@ export default {
         //   this.axios.post('/carts',{
         //       productId:id,
         //       selected:true,
-        //   }).then(()=>{
-
+        //   }).then((res)=>{
+            
         //   }).catch(()=>{
         //     this.showModal=true;
         //   })
