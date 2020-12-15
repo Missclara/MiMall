@@ -33,6 +33,7 @@ axios.interceptors.response.use(function(response){
    }else if(res.status==10){//没有登陆的时候，一般定义为1008 核心系统一般1001开始  业务系统一般是2001开始  
     if(path !='#/index'){
       window.location.href='/#/login';
+      return Promise.reject(res);
     }
     
    }else{

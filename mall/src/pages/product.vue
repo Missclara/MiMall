@@ -27,26 +27,18 @@
                 </div>
                 <div class="item-bg-2"></div>
                 <div class="item-bg-3"></div>
-                <!-- <div class="item-swiper">
-                    <a-carousel autoplay>
-                    <div>
-                        <img src="/imgs/product/gallery-2.png" alt="" />
-                    </div>
-                    <div>
-                        <img src="/imgs/product/gallery-3.png" alt="" />
-                    </div>
-                    <div>
-                        <img src="/imgs/product/gallery-4.png" alt="" />
-                    </div>
-                    <div>
-                        <img src="/imgs/product/gallery-5.jpg" alt="" />
-                    </div>
-                    <div>
-                        <img src="/imgs/product/gallery-6.jpg" alt="" />
-                    </div>
-                    </a-carousel>
+                  <div class="item-swiper">
+                    <swiper :option="swiperOption">
+                        <swiper-slide><img src="/imgs/product/gallery-2.png" alt=""></swiper-slide>
+                        <swiper-slide><img src="/imgs/product/gallery-3.png" alt=""></swiper-slide>
+                        <swiper-slide><img src="/imgs/product/gallery-4.png" alt=""></swiper-slide>
+                        <swiper-slide><img src="/imgs/product/gallery-5.jpg" alt=""></swiper-slide>
+                        <swiper-slide><img src="/imgs/product/gallery-6.jpg" alt=""></swiper-slide>
+                        <!-- Optional controls -->
+                        <div class="swiper-pagination"  slot="pagination"></div>
+                    </swiper>
                     <p class="desc">小米8 AI变焦双摄拍摄</p>
-                </div> -->
+                </div>
                <div class="item-video">
                 <h2>60帧超慢动作摄影<br />慢慢回味每一瞬间的精彩</h2>
                 <p>
@@ -72,16 +64,32 @@
         </div>
 </template>
 <script>
+import { Swiper, SwiperSlide,directive  } from 'vue-awesome-swiper'
 import ProductParam from './../components/ProductParam';
 export default {
     name:'product',
     components:{
         ProductParam,
+        Swiper,
+        SwiperSlide,
     },
+      directives: {
+    swiper: directive
+  },
     data(){
         return{
             showSlide:'',//控制动画效果
             product:{ },
+            swiperOption:{
+            autoplay:true,
+            slidesPerView:3,
+            spaceBetween: 30,
+            freeMode: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable :true,
+            }
+        }
         }
       
     },
