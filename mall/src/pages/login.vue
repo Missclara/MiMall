@@ -54,17 +54,21 @@ export default {
     methods:{
         login(){
             let {username,password}=this;
-           
             this.axios.post('/user/login',{
                 username,
                 password,
             }).then((res)=>{
                
             
-              this.$cookie.set('userId',res.id,{expires:'1M'});
-                 this.saveUserName(res.username);
-                this.$store.dispatch('saveUserName',res.username)
-                this.$router.push('/index');
+              this.$cookie.set('userId',res.id,{expires:'Session'});//会话级别是Session,浏览器的页签关掉，他是不会消失的，只有把浏览器全部退出他才是全部退出
+                this.saveUserName(res.username);
+             //this.$store.dispatch('saveUserName',res.username)
+                this.$router.push({
+                    name:'index',
+                    params:{
+                        from:'login'
+                    }
+                });
 
               
             })
@@ -76,7 +80,7 @@ export default {
                 password:'1234',
                 email:'1372459@163.com'
             }).then(()=>{
-                alert('注册成功')
+               this.$message.success('注册成功')
             }) 
         }
     }

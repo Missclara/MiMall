@@ -4,8 +4,12 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'//每个页面都有导入axios，把axios挂载到每个页面上，用vue-axios可以用this直接访问
 import VueLazyload from 'vue-lazyload'//实现图片懒加载
 import VueCookie from "vue-cookie"
+import {Message} from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
 import store from './store';
 import App from './App.vue'
+
 
 //import env from './env'
 import './assets/scss/base.scss';
@@ -37,8 +41,8 @@ axios.interceptors.response.use(function(response){
     }
     
    }else{
-
-     alert(res.msg);
+   
+    Vue.$message.warning(res.msg);
      return Promise.reject(res);
    }
 })
@@ -46,10 +50,12 @@ axios.interceptors.response.use(function(response){
 
 Vue.use(VueAxios,axios)
 Vue.use(VueCookie)
+
 Vue.use(VueLazyload,{
   loading:'/imgs/loading-svg/loading-bars.svg'
 })
 Vue.config.productionTip = false//生产环境的提示
+Vue.prototype.$message = Message;
 new Vue({
   router,
   store,

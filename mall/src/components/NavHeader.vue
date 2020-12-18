@@ -11,6 +11,7 @@
         <div class="topbar-user">
           <a href="javascript:;" v-if="username">{{username}}</a>
           <a href="javascript:;" v-if="!username" @click="login">登录</a>
+          <a href="javascript:;" v-if="username" @click="logout">退出</a>
           <a href="javascript:;"  v-if="username">我的订单</a>
           <a href="javascript:;" class="my-cart" @click="goToCart">
             <span class="icon-cart"></span> 购物车{{cartCount}}</a
@@ -148,7 +149,12 @@ export default {
   },
   mounted(){
     this.getProductList()
-
+    let params=this.$route.params;
+    if(params&&params.from=='login'){
+       this.getCartCount();
+    }
+   
+   
   },
   methods:{
     login(){
@@ -166,8 +172,23 @@ export default {
         // }
       })
     },
+    logout(){
+       this.axios.post('/user/logout').then(()=>{
+           this.$cookie.set('userId',"",{expires:'-1'});
+           this.$store.dispatch('saveUserName',"");
+           this.$store.dispatch('saveCartCount',"0");
+           this.$message.success('退出成功');
+       })
+    },
     goToCart(){
       this.$router.push('/cart')
+    },
+     getCartCount(){
+       this.axios.get('/carts/products/sum').then((res=0)=>{
+        //to-do 保存到vue里面
+          this.$store.dispatch('saveCartCount',res)
+
+      })
     }
   },
 
@@ -213,33 +234,7 @@ export default {
       position: relative;
      height: 112px;
       @include flex();
-     .header-logo{
-       display: inline-block;
-       width: 55px;
-       height: 55px;
-       background-color: #ff6600;
-       a{
-         display: inline-block;
-         width: 110px;
-         height: 55px;
-         &::before{
-           content: '';
-            @include bgImg(55px,55px,"/imgs/mi-logo.png",55px);
-            transition: margin .2s;
-
-         }
-           &::after{
-              content: '';
-               @include bgImg(55px,55px,"/imgs/mi-home.png",55px);
-         
-
-         }
-        &:hover::before{
-          margin-left: -55px;
-          transition: margin .2s;
-        }
-       }
-     }
+    
      .header-menu{
        display: inline-block;
        width: 643px;

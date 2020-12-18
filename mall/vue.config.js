@@ -13,5 +13,7 @@ module.exports = {
         
       }
     }
-  }
+  },
+  lintOnSave:false,//去掉校验
+  
 }

@@ -12,15 +12,15 @@
             </div>
             <div class="modal-footer">
                  <a href="javascript:;" class="btn" v-if="btnType==1" @click="$emit('submit')">{{sureText}}</a>
-                 <a href="javascript:;" class="btn" v-if="btnType==2" @click="$emit('cancel')">{{cancelText}}</a>
+                 <a href="javascript:;" class="btn btn-default" v-if="btnType==2" @click="$emit('cancel')">{{cancelText}}</a>
                 <div class="btn-group" v-if="btnType==3">
                     <a href="javascript:;" class="btn" @click="$emit('submit')">{{sureText}}</a>
-                    <a href="javascript:;" class="btn" @click="$emit('cancel')">{{cancelText}}</a>
+                    <a href="javascript:;" class="btn btn-default" @click="$emit('cancel')">{{cancelText}}</a>
                 </div>
             
             </div>
             </div>
-        </div>`
+        </div>
     </transition>
   
 </template>
@@ -53,4 +53,5 @@ export default {
 @import './../assets/scss/mixin.scss';
 @import './../assets/scss/config.scss';
 @import './../assets/scss/modal.scss';
+@import './../assets/scss/button.scss';
 </style>
