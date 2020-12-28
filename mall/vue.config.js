@@ -2,7 +2,7 @@ module.exports = {
   lintOnSave: false,
   devServer:{
     host:'localhost',
-    port:8080,
+    port:8086,
     proxy:{
       '/api':{
         target:"http://mall-pre.springboot.cn",//https://mall-pre.springboot.cn/https://dev-www.imooc.com
@@ -14,6 +14,10 @@ module.exports = {
       }
     }
   },
-  lintOnSave:false,//去掉校验
+  //lintOnSave:false,//去掉校验
+  productionSourceMap:true,
+  chainWebpack:((config)=>{
+    config.plugins.delete('prefetch')
+  })
   
 }

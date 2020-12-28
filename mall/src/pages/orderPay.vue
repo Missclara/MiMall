@@ -1,5 +1,10 @@
 <template>
   <div class="order-pay">
+    <order-header title="订单支付">
+        <template  v-slot:tip>
+               <span>请谨防钓鱼链接或诈骗电话，了解更多</span> 
+        </template>
+    </order-header>
     <div class="wrapper">
       <div class="container">
         <div class="order-wrap">
@@ -11,7 +16,7 @@
               <p>{{addressInfo}}</p>
             </div>
             <div class="order-total">
-              <p>应付总额：<span>2599</span>元</p>
+              <p>应付总额：<span>{{payment}}</span>元</p>
               <p>订单详情<em class="icon-down" :class="{'up':showDetail}"  @click="showDetail=!showDetail"></em></p>
             </div>
           </div>
@@ -52,11 +57,26 @@
       </div>
     </div>
     <scan-pay-code v-if="showPay" @close="closePayModal" :img="payImg"></scan-pay-code>
+    <modal 
+    title="支付确认" 
+    btnType="3"
+    :showModal="showPayModal"
+    sureText="查看订单"
+    cancelText="未支付"
+    @cancel="showPayModal=false"
+    @submit="goOrderList"
+    >
+      <template v-slot:body>
+        <p>您确认是否完成支付？</p>
+      </template>
+    </modal>
   </div>
 </template>
 <script>
 import QRCode from 'qrcode'
 import ScanPayCode from './../components/ScanPayCode'
+import Modal from './../components/Modal'
+import OrderHeader from './../components/OrderHeader'
 export default{
   name:'order-pay',
   data(){
@@ -68,10 +88,16 @@ export default{
         payType:'',//支付类型
         showPay:false,//是否显示微信支付弹框
         payImg:'',//微信支付二维码
+        showPayModal:false,//是否显示二次支付弹框
+        payment:0,
+        T:'',//定时器ID
     }
   },
   components:{
-      ScanPayCode
+      ScanPayCode,
+      Modal,
+      OrderHeader
+
   },
   mounted(){
       this.getOrderDetail();
@@ -82,6 +108,7 @@ export default{
             let item=res.shippingVo;
             this.addressInfo=`${item.receiverName} ${item.receiverMobile} ${item.receiverProvince} ${item.receiverCity} ${item.receiverDistrict} ${item.receiverAddress}`;
             this.orderDetail=res.orderItemVoList;
+            this.payment=res.payment
         })
     },
     paySubmit(payType){
@@ -100,6 +127,7 @@ export default{
                 .then(url => {
                     this.showPay=true;
                     this.payImg=url;
+                    this.loopOrderState();
                 
                 })
                 .catch(err => {
@@ -113,6 +141,23 @@ export default{
     //关闭微信团框
     closePayModal(){
       this.showPay=false;
+      this.showPayModal=true;
+      this.loopOrderState();
+
+    },
+    //轮询当前订单支付状态
+    loopOrderState(){
+     this.T= setInterval((res)=>{
+       this.axios.get(`/orders/${this.orderId}`).then((res)=>{
+         if(res.status==20){
+           clearInterval(this.T)
+           this.goOrderList();
+         }
+       })
+      },1000)
+    },
+    goOrderList(){
+      this.$router.push('/order/list')
     }
   }
 
