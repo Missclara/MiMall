@@ -69,3 +69,21 @@ yum install pcre-devel zlib-devel openssl-devel –y
 ln -s /soft/node-v12.14.0/bin/node /usr/local/bin/node
 ln -s /soft/node-v12.14.0/bin/npm /usr/local/bin/npm
 
+which nginx 查看nginx路径
+nginx -t 查看配置文件
+cat nginx.conf 查看
+nginx -s stop
+clear 清屏
+vi nginx.conf
+vi index.html 进入页面
+wget https://npm.taobao.org/mirrors/node/v12.14.0/node-v12.14.0-linux-x64.tar.xz
+tar -xvf 文件名 ——解压
+./node -v
+建一个软连接
+echo $PATH
+devTools 调试
+
+
+
+
+
